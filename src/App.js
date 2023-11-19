@@ -2,6 +2,36 @@ import Card from './components/Card'; //Создаем компанент Card �
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
+const arr = [
+  {
+  title: 'Кросовки 1',
+  price: 12999,
+  imageUrl: '/img/sneakers.jpg',
+  },
+
+  {
+    title: 'Кросовки 2',
+    price: 4500,
+    imageUrl: '/img/sneakers.jpg',
+    },
+
+  {
+     title: 'Кросовки 3',
+     price: 8500,
+     imageUrl: '/img/sneakers.jpg',
+      },
+
+      {
+        title: 'Кросовки 4',
+        price: 7530,
+        imageUrl: '/img/sneakers.jpg',
+        },
+];
+
+
+
+
+
 function App() {
   return (
     <div className="wrapper clear">
@@ -19,7 +49,10 @@ function App() {
 
 {/* Карточки товаров */}
         <div className=" d-flex">
-          <Card />  {/*компонент карточки */}
+         {arr.map((obj) => (
+          <Card title={obj.title} price ={obj.price} imageUrl={obj.imageUrl}/>
+         ))}
+
         </div>
       </div>
     </div>
