@@ -35,41 +35,41 @@ header{
   }
 }
 
-.card{
-  border: 1px solid #F3F3F3;
-  padding: 30px;
-  width: 220px;
-  border-radius: 40px;
-  margin-right: 30px;
-  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
-  //cursor: pointer;
+// .card{
+//   border: 1px solid #F3F3F3;
+//   padding: 30px;
+//   width: 220px;
+//   border-radius: 40px;
+//   margin-right: 30px;
+//   transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+//   //cursor: pointer;
 
   
-  &:hover {//при наведении на товар появляется тень 
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.07);//rgba(150, 197, 178, 0.425); зеленая тень
-    transform:  translateY(-10px); //поднятие карточки при наведении
-  }
+//   &:hover {//при наведении на товар появляется тень 
+//     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.07);//rgba(150, 197, 178, 0.425); зеленая тень
+//     transform:  translateY(-10px); //поднятие карточки при наведении
+//   }
 
-  .favorite{
-    position: absolute;
-    cursor: pointer;
-  }
+//   .favorite{
+//     position: absolute;
+//     cursor: pointer;
+//   }
 
-  span{
-    opacity: 0.6;//проздачность
-    text-transform: uppercase;
-    font-size: 13px;
-  }
+//   span{
+//     opacity: 0.6;//проздачность
+//     text-transform: uppercase;
+//     font-size: 13px;
+//   }
 
-  b{
-    font-size: 13px;
-  }
+//   b{
+//     font-size: 13px;
+//   }
 
-  h5{
-    font-weight: 400;
-    font-size: 14px;
-  }
-}
+//   h5{
+//     font-weight: 400;
+//     font-size: 14px;
+//   }
+// }
 
 .button{
   background: #FFFFFF;
