@@ -1,14 +1,28 @@
+import React from 'react'
 import styles from './Card.module.scss';
 
-console.log(styles);
+
 
 function Card(props) {
-console.log(props);
+const [isAdded, setIsAdded] = React.useState(false);
+
+const onClickPlus = ()=>{
+  setIsAdded(!isAdded);
+};
+
+
+// React.useEffect(()=>{
+//   console.log('Переменная изменилась ')
+// }, [isAdded]);
+
+
+
+//console.log(isAdded, props.title);
 
     return (
         
         <div className={styles.card}>
-          <div className={styles.favorite}>
+          <div className={styles.favorite} onClick={props.onFavorite}> 
             <img src="/img/like_zero.svg" alt="Unlike it!"/> 
           </div> 
           <img width={133} high={112} src={props.imageUrl}  alt="sneakers" />
@@ -18,9 +32,9 @@ console.log(props);
               <span> Цена: </span>
               <b> {props.price} руб.</b>
             </div>
-            <button className="button" onClick={props.priKlicke}> 
-            <img width={11} high={11} src="/img/plus.svg" alt="plus"/>
-            </button>
+          
+            <img className={styles.plus} onClick={onClickPlus}  src={isAdded ? "/img/add_to_card.svg":"/img/btn_plus.svg" } alt="plus"/>
+            {/* Если нажали на кнпку меняй кртинку */}
           </div>
         </div>
     );

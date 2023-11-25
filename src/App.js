@@ -1,42 +1,29 @@
+import React from 'react'
 import Card from './components/Card'; //Создаем компанент Card и импортруем код в него
 import Header from './components/Header';
 import Drawer from './components/Drawer';
-
-const arr = [
-  {
-  title: 'Кросовки 1',
-  price: 12999,
-  imageUrl: '/img/sneakers.jpg',
-  },
-
-  {
-    title: 'Кросовки 2',
-    price: 4500,
-    imageUrl: '/img/sneakers.jpg',
-    },
-
-  {
-     title: 'Кросовки 3',
-     price: 8500,
-     imageUrl: '/img/sneakers.jpg',
-      },
-
-      {
-        title: 'Кросовки 4',
-        price: 7530,
-        imageUrl: '/img/sneakers.jpg',
-        },
-];
-
 
 
 
 
 function App() {
+  const [items,setItems] = React.useState([ ]) //для массива 
+  const[cartOpened, setCartOpened] = React.useState(false);
+
+
+  //вытаскиваю данные с сервера, берем ответ сервера, превращаем в json и потом уже возвращаем данные этого формата в консоль 
+fetch('https://6561854ddcd355c08323e86a.')
+.then((responce) => {
+  return responce.json();
+})
+.then(json => {
+  setItems(json);
+});
+
   return (
     <div className="wrapper clear">
-      <Drawer/>{/*компонент карзины */}
-      <Header/>{/*компонент шапки */}
+      {cartOpened ? <Drawer onClose={()=>setCartOpened(false)}/> : null}{/*компонент карзины */}
+      <Header onClickCart={()=> setCartOpened(true)}   />{/*компонент шапки */}
 
       <div className="content p-40">
        <div className="d-flex align-center justify-between mb-40"> 
@@ -48,13 +35,14 @@ function App() {
         </div>
 
 {/* Карточки товаров */}
-        <div className=" d-flex">
-         {arr.map((obj) => (
+        <div className=" d-flex flex-wrap">
+         {items.map((obj) => (
           <Card 
             title={obj.title} 
             price ={obj.price} 
             imageUrl={obj.imageUrl}
-            priKlicke={()=>console.log(obj)}
+            onFavorite={()=>console.log('Добавили в закладки')}
+            onPlus={()=>console.log('Нажали плюс')}
           />
          ))}
 

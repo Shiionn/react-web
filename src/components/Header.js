@@ -1,4 +1,5 @@
-function Header () {
+function Header (props) {
+
 return(
     <header class="d-flex justify-between align-center p-40">  {/* d-flex=display:flex in scss*/}
     <div className="d-flex align-center">
@@ -10,7 +11,7 @@ return(
       </div>
      </div>
      <ul className="d-flex">
-       <li className="mr-30"> {/*mr-30=margin-right 30px*/ }
+       <li onClick={props.onClickCart} className="mr-30 cu-p"> {/*mr-30=margin-right 30px*/ }
          <img widh={18} heigh={18} src="/img/cart.svg" alt="description"/>
          <span> 1205 руб. </span>
        </li>

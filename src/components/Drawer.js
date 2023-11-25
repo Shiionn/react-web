@@ -1,10 +1,10 @@
-function Drawer () {
+function Drawer (props) {
 return(
-<div  style ={{display:'none'}} className="overlay"> {/*Тень на товары style ={{display:'none'}}*/}
+<div   className="overlay"> {/*Тень на товары style ={{display:'none'}}*/}
     <div className="drawer">
         <h2 className=" d-flex justify-between mb-30"> 
             Корзина 
-            <img className="removeBtn" src="/img/removeAll.svg" alt="Remove"/>
+            <img  onClick={props.onClose} className="removeBtn" src="/img/removeAll.svg" alt="Close"/>
         </h2>
 {/* начало  эллементов коризины */}
         <div className="items">
@@ -16,7 +16,7 @@ return(
         style={{backgroundImage:'url(/img/sneakers.jpg)'}} 
         className="cartItemImg"></div>
 
-        <div className="mr-20 flex">
+        <div className="mr-20 flex ">
         <p className="mb-5">Инфо о товаре название</p>
         <b>12 999 руб.</b>
         </div>
