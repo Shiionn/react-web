@@ -1,43 +1,39 @@
-function Drawer (props) {
+function Drawer ({onClose, items = [] }) {
 return(
 <div   className="overlay"> {/*Тень на товары style ={{display:'none'}}*/}
     <div className="drawer">
         <h2 className=" d-flex justify-between mb-30"> 
-            Корзина 
-            <img  onClick={props.onClose} className="removeBtn" src="/img/removeAll.svg" alt="Close"/>
+            Корзина <img  onClick={onClose} className="removeBtn" src="/img/removeAll.svg" alt="Close"/>
         </h2>
+
 {/* начало  эллементов коризины */}
         <div className="items">
+            {items.map((obj)=> (
 
+                <div className="cartItem d-flex align-center mb-20">           
+                <div
+                style={{ backgroundImage: `url(${obj.imageUrl})` }}
+                className="cartItemImg"></div>
+
+
+                <div className="mr-20 flex ">
+                <p className="mb-5">{obj.title}</p>
+                <b>{obj.price}</b>
+                </div>
+                <img className="removeBtn" src="/img/btn_remove.svg" alt="Remove"/>
+                </div> 
+
+                ))
+
+            }
+        </div>
 {/* первый  эллемент коризины */}
 
-    <div className="cartItem d-flex align-center mb-20">
-        <div 
-        style={{backgroundImage:'url(/img/sneakers.jpg)'}} 
-        className="cartItemImg"></div>
-
-        <div className="mr-20 flex ">
-        <p className="mb-5">Инфо о товаре название</p>
-        <b>12 999 руб.</b>
-        </div>
-        <img className="removeBtn" src="/img/btn_remove.svg" alt="Remove"/>
-    </div> 
+    
 
 
-{/* второй  эллемент коризины */}
 
-    <div className="cartItem d-flex align-center mb-20">
-        <div 
-        style={{backgroundImage:'url(/img/sneakers.jpg)'}} 
-        className="cartItemImg"></div>
 
-        <div className="mr-20 flex">
-         <p className="mb-5">Инфо о товаре название</p>
-        <b>12 999 руб.</b>
-        </div>
-        <img className="removeBtn" src="/img/btn_remove.svg" alt="Remove"/>
-        </div> 
-    </div>
 {/* конец эллементов коризины */}
 
     <div className="cartTotalBlock">
@@ -58,7 +54,8 @@ return(
       </button>
     </div>
 {/* Конец вкладки корзина */}
-  </div>
+  
+</div>
 </div>
 
 );

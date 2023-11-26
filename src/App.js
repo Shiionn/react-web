@@ -7,22 +7,39 @@ import Drawer from './components/Drawer';
 
 
 function App() {
-  const [items,setItems] = React.useState([ ]) //для массива 
-  const[cartOpened, setCartOpened] = React.useState(false);
+  const [items,setItems] = React.useState([]); //для массива товаров
+  const [cartItems,setCartItems] = React.useState([]) ; //рендерим происходящие здесть в кмпоненте drawer
+  const[cartOpened, setCartOpened] = React.useState(false); // для открытия корзины
 
 
-  //вытаскиваю данные с сервера, берем ответ сервера, превращаем в json и потом уже возвращаем данные этого формата в консоль 
-fetch('https://6561854ddcd355c08323e86a.')
-.then((responce) => {
-  return responce.json();
-})
-.then(json => {
-  setItems(json);
-});
+
+
+//функция для отображения товара с сервера (рендерится - 1 раз)  
+React.useEffect( () =>{
+//вытаскиваю данные с сервера, берем ответ сервера, превращаем в json и потом уже возвращаем данные этого формата в консоль 
+
+  fetch('https://6561854ddcd355c08323e86a.mockapi.io/items')
+  .then((responce) => {
+    return responce.json();
+  })
+  .then(json => {
+    setItems(json);
+  });
+
+}, []); //вызываем эту функцию при первом рендере App.js
+
+
+
+
+const onAddToCart = (obj) => { 
+  setCartItems(prev =>[...prev, obj]); //добавляем новый объект в конец
+};
+
+console.log(cartItems)
 
   return (
     <div className="wrapper clear">
-      {cartOpened ? <Drawer onClose={()=>setCartOpened(false)}/> : null}{/*компонент карзины */}
+      {cartOpened ? <Drawer items ={cartItems} onClose={()=>setCartOpened(false)}/> : null}{/*компонент карзины */}
       <Header onClickCart={()=> setCartOpened(true)}   />{/*компонент шапки */}
 
       <div className="content p-40">
@@ -35,14 +52,14 @@ fetch('https://6561854ddcd355c08323e86a.')
         </div>
 
 {/* Карточки товаров */}
-        <div className=" d-flex flex-wrap">
-         {items.map((obj) => (
+        <div className=" d-flex flex-wrap"> {/* map пробегается по масиву */}
+         {items.map((item) => (  
           <Card 
-            title={obj.title} 
-            price ={obj.price} 
-            imageUrl={obj.imageUrl}
+            title={item.title} 
+            price ={item.price} 
+            imageUrl={item.imageUrl}
             onFavorite={()=>console.log('Добавили в закладки')}
-            onPlus={()=>console.log('Нажали плюс')}
+            onPlus={(obj)=> onAddToCart(obj)}
           />
          ))}
 
