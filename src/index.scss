@@ -85,6 +85,17 @@ header{
   border: 1px solid #F3F3F3;
   border-radius: 10px;
   padding: 0 15px;
+  position: relative;
+
+  .clear{
+    position: absolute;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    top:14px;
+    right: 10px;
+
+  }
 
   input{ //убрали рамку с слова поиск
     border: 0;

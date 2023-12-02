@@ -3,7 +3,7 @@ function Header (props) {
 return(
     <header class="d-flex justify-between align-center p-40">  {/* d-flex=display:flex in scss*/}
     <div className="d-flex align-center">
-     <img widh={40} heigh={40} src="/img/logo.png" alt="description"/>
+     <img widh={40} heigh={40} src="/img/logo_1.png" alt="description"/>
      {/* реакт сам поймет что искать в public */}
      <div> 
        <h3 className="text-uppercase">Name of website</h3>

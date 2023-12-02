@@ -9,6 +9,7 @@ import Drawer from './components/Drawer';
 function App() {
   const [items,setItems] = React.useState([]); //для массива товаров
   const [cartItems,setCartItems] = React.useState([]) ; //рендерим происходящие здесть в кмпоненте drawer
+  const [searchValue,setSearchvalue] = React.useState('') ; //для поиска, передаем строку а не массив
   const[cartOpened, setCartOpened] = React.useState(false); // для открытия корзины
 
 
@@ -35,7 +36,13 @@ const onAddToCart = (obj) => {
   setCartItems(prev =>[...prev, obj]); //добавляем новый объект в конец
 };
 
-console.log(cartItems)
+
+const onChangeSearchInput=(event)=>{
+  console.log(event.target.value);
+  setSearchvalue(event.target.value);
+}
+
+//console.log(cartItems)
 
   return (
     <div className="wrapper clear">
@@ -44,17 +51,26 @@ console.log(cartItems)
 
       <div className="content p-40">
        <div className="d-flex align-center justify-between mb-40"> 
-        <h1>Все товары </h1>
+        <h1>{searchValue? `Поиск по заросу: "${searchValue}"` : 'Все товары'}</h1>
           <div className="search-block d-flex">
             <img src="/img/search.svg" alt="Search"/>
-            <input placeholder="Поиск..."/>
+            {searchValue && (
+            <img 
+              onClick={()=>setSearchvalue('')}
+              className="clear cu-p" 
+              src="/img/removeAll.svg" 
+              alt="Clear serch"
+            />
+          )}
+            <input onChange={onChangeSearchInput} value ={searchValue} placeholder="Поиск..."/>
           </div>
         </div>
 
 {/* Карточки товаров */}
         <div className=" d-flex flex-wrap"> {/* map пробегается по масиву */}
-         {items.map((item) => (  
+         {items.filter(item=>item.title.includes(searchValue)).map((item, index) => (  
           <Card 
+            key={index}
             title={item.title} 
             price ={item.price} 
             imageUrl={item.imageUrl}
