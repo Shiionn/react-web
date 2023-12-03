@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios'; //импортируем библиотеку 
 import Card from './components/Card'; //Создаем компанент Card и импортруем код в него
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -15,16 +16,17 @@ function App() {
 
 
 
-//функция для отображения товара с сервера (рендерится - 1 раз)  
+//функция для отображения товара с сервера (рендерится - 1 раз при запуске)  
 React.useEffect( () =>{
-//вытаскиваю данные с сервера, берем ответ сервера, превращаем в json и потом уже возвращаем данные этого формата в консоль 
+  //get запрос для получения данных о товарах 
+  axios.get('https://6561854ddcd355c08323e86a.mockapi.io/items').then(res=>{
+    setItems(res.data);
+  });
 
-  fetch('https://6561854ddcd355c08323e86a.mockapi.io/items')
-  .then((responce) => {
-    return responce.json();
-  })
-  .then(json => {
-    setItems(json);
+
+  //запрос данных для корзины
+  axios.get('https://6561854ddcd355c08323e86a.mockapi.io/cart').then(res=>{
+    setCartItems(res.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
   });
 
 }, []); //вызываем эту функцию при первом рендере App.js
@@ -32,13 +34,26 @@ React.useEffect( () =>{
 
 
 
+//ДОБАВЛЕНИЕ В КОРЗИНУ
 const onAddToCart = (obj) => { 
+  //post запрос для отпраки данных на бэк
+  axios.post('https://6561854ddcd355c08323e86a.mockapi.io/cart', obj); //передаем объект который добавляем в корзину по ссылке на бэк
   setCartItems(prev =>[...prev, obj]); //добавляем новый объект в конец
 };
 
 
+
+//УДАЛЕНИЕ ИЗ КОРЗИНЫ
+const onRemoveItem = (id) => {
+  console.log(id);
+  //axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart${id}`); 
+   setCartItems(prev =>prev.filter((item) =>item.id !== id)); //добавляем новый объект в конец
+  //берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+  };
+
+
 const onChangeSearchInput=(event)=>{
-  console.log(event.target.value);
+  //console.log(event.target.value);
   setSearchvalue(event.target.value);
 }
 
@@ -46,7 +61,13 @@ const onChangeSearchInput=(event)=>{
 
   return (
     <div className="wrapper clear">
-      {cartOpened ? <Drawer items ={cartItems} onClose={()=>setCartOpened(false)}/> : null}{/*компонент карзины */}
+      {/* {cartOpened ? <Drawer items ={cartItems}      onClose={()=>setCartOpened(false)} onRemove={onRemoveItem} /> : null}компонент карзины */}
+      
+      {cartOpened && (
+        <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
+      )}
+
+
       <Header onClickCart={()=> setCartOpened(true)}   />{/*компонент шапки */}
 
       <div className="content p-40">
@@ -68,7 +89,7 @@ const onChangeSearchInput=(event)=>{
 
 {/* Карточки товаров */}
         <div className=" d-flex flex-wrap"> {/* map пробегается по масиву */}
-         {items.filter(item=>item.title.includes(searchValue)).map((item, index) => (  
+         {items.filter(item=>item.title.toLowerCase().includes(searchValue)).map((item, index) => (  
           <Card 
             key={index}
             title={item.title} 
