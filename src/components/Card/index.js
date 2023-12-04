@@ -5,17 +5,22 @@ import styles from './Card.module.scss';
 
 function Card({title, imageUrl, price, onFavorite, onPlus}) {
 const [isAdded, setIsAdded] = React.useState(false);
+const[isFavorite, setIsFavorite]=React.useState(false); //метод для добвления в избранное
 
+
+//для добавления в корзину
 const onClickPlus = ()=>{
   onPlus({title, imageUrl, price});
   setIsAdded(!isAdded);
 };
 
 
-// React.useEffect(()=>{
-//   console.log('Переменная изменилась ')
-// }, [isAdded]);
 
+//для добавления в избранное
+const onClickFavorite = ()=>{
+  onFavorite({title, imageUrl, price}); //вызываем метод который вызывет другой метод который в свою очередь отправляет запрос на сервер
+  setIsFavorite(!isFavorite);
+};
 
 
 //console.log(isAdded, props.title);
@@ -23,8 +28,11 @@ const onClickPlus = ()=>{
     return (
         
         <div className={styles.card}>
-          <div className={styles.favorite} onClick={onFavorite}> 
-            <img src="/img/like_zero.svg" alt="Unlike it!"/> 
+          <div className={styles.favorite} onClick={onClickFavorite}> 
+            <img 
+              src={isFavorite ? "/img/like_one.svg":"/img/like_zero.svg" }
+              alt="Unlike it!"
+            /> 
           </div> 
           <img width={133} high={112} src={imageUrl}  alt="sweater" />
           <h5>{title}</h5>
@@ -34,7 +42,12 @@ const onClickPlus = ()=>{
               <b> {price} руб.</b>
             </div>
           
-            <img className={styles.plus} onClick={onClickPlus}  src={isAdded ? "/img/add_to_card.svg":"/img/btn_plus.svg" } alt="plus"/>
+            <img 
+              className={styles.plus} 
+              onClick={onClickPlus}  
+              src={isAdded ? "/img/add_to_card.svg":"/img/btn_plus.svg" } 
+              alt="plus"
+            />
             {/* Если нажали на кнпку меняй кртинку */}
           </div>
         </div>

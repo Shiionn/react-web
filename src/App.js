@@ -10,6 +10,7 @@ import Drawer from './components/Drawer';
 function App() {
   const [items,setItems] = React.useState([]); //для массива товаров
   const [cartItems,setCartItems] = React.useState([]) ; //рендерим происходящие здесть в кмпоненте drawer
+  const [favorites,setFavorites] = React.useState([]) ;//массив для сохранения закладок
   const [searchValue,setSearchvalue] = React.useState('') ; //для поиска, передаем строку а не массив
   const[cartOpened, setCartOpened] = React.useState(false); // для открытия корзины
 
@@ -38,17 +39,34 @@ React.useEffect( () =>{
 const onAddToCart = (obj) => { 
   //post запрос для отпраки данных на бэк
   axios.post('https://6561854ddcd355c08323e86a.mockapi.io/cart', obj); //передаем объект который добавляем в корзину по ссылке на бэк
-  setCartItems(prev =>[...prev, obj]); //добавляем новый объект в конец
+  setCartItems((prev) =>[...prev, obj]); //добавляем новый объект в конец
 };
 
 
 
+//ДОБАВЛЕНИЕ В ИЗБРАННОЕ
+const onAddToFavorite = (obj) => { 
+  //post запрос для отпраки данных на бэк
+  axios.post('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites', obj); //передаем объект который добавляем в корзину по ссылке на бэк
+  setFavorites((prev) =>[...prev, obj]); //добавляем новый объект в конец
+};
+
+
+
+
 //УДАЛЕНИЕ ИЗ КОРЗИНЫ
-const onRemoveItem = (id) => {
-  console.log(id);
-  //axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart${id}`); 
-   setCartItems(prev =>prev.filter((item) =>item.id !== id)); //добавляем новый объект в конец
-  //берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+// const onRemoveItem = (id) => {
+//   console.log(id);
+//   axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart${id}`); 
+//    setCartItems(prev =>prev.filter((item) =>item.id !== id)); //добавляем новый объект в конец
+//   //берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+//   };
+
+
+
+  const onRemoveItem = (id) => {
+    axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
 
@@ -95,7 +113,7 @@ const onChangeSearchInput=(event)=>{
             title={item.title} 
             price ={item.price} 
             imageUrl={item.imageUrl}
-            onFavorite={()=>console.log('Добавили в закладки')}
+            onFavorite={(obj)=>onAddToFavorite(obj)}
             onPlus={(obj)=> onAddToCart(obj)}
           />
          ))}

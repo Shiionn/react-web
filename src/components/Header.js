@@ -12,11 +12,14 @@ return(
      </div>
      <ul className="d-flex">
        <li onClick={props.onClickCart} className="mr-30 cu-p"> {/*mr-30=margin-right 30px*/ }
-         <img widh={18} heigh={18} src="/img/cart.svg" alt="description"/>
+         <img widh={18} heigh={18} src="/img/cart.svg" alt="cart"/>
          <span> 1205 руб. </span>
        </li>
+       <li className="mr-20 cu-p">
+         <img widh={18} heigh={18} src="/img/fav.svg" alt="favorite"/> 
+       </li>
        <li>
-         <img widh={18} heigh={18} src="/img/user.svg" alt="description"/> 
+         <img widh={18} heigh={18} src="/img/user.svg" alt="user"/> 
        </li>
      </ul>
    </header>
