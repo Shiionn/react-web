@@ -1,9 +1,10 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import axios from 'axios'; //импортируем библиотеку 
-import Card from './components/Card'; //Создаем компанент Card и импортруем код в него
 import Header from './components/Header';
 import Drawer from './components/Drawer';
-
+import Home from './pages/Home'
+import Favorites from './pages/Favorites'
 
 
 
@@ -30,6 +31,12 @@ React.useEffect( () =>{
     setCartItems(res.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
   });
 
+
+  //запрос данных для избранного
+  axios.get('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites').then(res=>{
+    setFavorites(res.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
+  });
+
 }, []); //вызываем эту функцию при первом рендере App.js
 
 
@@ -44,30 +51,29 @@ const onAddToCart = (obj) => {
 
 
 
-//ДОБАВЛЕНИЕ В ИЗБРАННОЕ
-const onAddToFavorite = (obj) => { 
-  //post запрос для отпраки данных на бэк
-  axios.post('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites', obj); //передаем объект который добавляем в корзину по ссылке на бэк
-  setFavorites((prev) =>[...prev, obj]); //добавляем новый объект в конец
+
+//УДАЛЕНИЕ ИЗ КОРЗИНЫ
+const onRemoveItem = (id) => {
+  axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${id}`);
+  setCartItems((prev) => prev.filter((item) => item.id !== id));//берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+};
+
+
+const onAddToFavorite = async (obj) => {
+  try {
+    if (favorites.find((favObj) => favObj.id === obj.id)) {
+      axios.delete(`https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites/${obj.id}`);
+    } else {
+      const { data } = await axios.post('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites/', obj);
+      setFavorites((prev) => [...prev, data]);
+    }
+  } catch (error) {
+    alert('Не удалось добавить в фавориты');
+  }
 };
 
 
 
-
-//УДАЛЕНИЕ ИЗ КОРЗИНЫ
-// const onRemoveItem = (id) => {
-//   console.log(id);
-//   axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart${id}`); 
-//    setCartItems(prev =>prev.filter((item) =>item.id !== id)); //добавляем новый объект в конец
-//   //берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
-//   };
-
-
-
-  const onRemoveItem = (id) => {
-    axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
 
 
 const onChangeSearchInput=(event)=>{
@@ -75,7 +81,7 @@ const onChangeSearchInput=(event)=>{
   setSearchvalue(event.target.value);
 }
 
-//console.log(cartItems)
+
 
   return (
     <div className="wrapper clear">
@@ -88,38 +94,23 @@ const onChangeSearchInput=(event)=>{
 
       <Header onClickCart={()=> setCartOpened(true)}   />{/*компонент шапки */}
 
-      <div className="content p-40">
-       <div className="d-flex align-center justify-between mb-40"> 
-        <h1>{searchValue? `Поиск по заросу: "${searchValue}"` : 'Все товары'}</h1>
-          <div className="search-block d-flex">
-            <img src="/img/search.svg" alt="Search"/>
-            {searchValue && (
-            <img 
-              onClick={()=>setSearchvalue('')}
-              className="clear cu-p" 
-              src="/img/removeAll.svg" 
-              alt="Clear serch"
-            />
-          )}
-            <input onChange={onChangeSearchInput} value ={searchValue} placeholder="Поиск..."/>
-          </div>
-        </div>
+      
+      <Route path="/" exact>
+        <Home
+          items={items}
+          searchValue={searchValue}
+          setSearchValue={setSearchvalue}
+          onChangeSearchInput={onChangeSearchInput}
+          onAddToFavorite={onAddToFavorite}
+          onAddToCart={onAddToCart}
+        />
+      </Route>
 
-{/* Карточки товаров */}
-        <div className=" d-flex flex-wrap"> {/* map пробегается по масиву */}
-         {items.filter(item=>item.title.toLowerCase().includes(searchValue)).map((item, index) => (  
-          <Card 
-            key={index}
-            title={item.title} 
-            price ={item.price} 
-            imageUrl={item.imageUrl}
-            onFavorite={(obj)=>onAddToFavorite(obj)}
-            onPlus={(obj)=> onAddToCart(obj)}
-          />
-         ))}
 
-        </div>
-      </div>
+      <Route path="/favorites" exact>
+        <Favorites items={favorites} onAddToFavorite={onAddToFavorite}/>
+      </Route>
+
     </div>
   );
 }

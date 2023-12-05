@@ -3,9 +3,9 @@ import styles from './Card.module.scss';
 
 
 
-function Card({title, imageUrl, price, onFavorite, onPlus}) {
+function Card({id, title, imageUrl, price, onFavorite, onPlus, favorited = false}) {
 const [isAdded, setIsAdded] = React.useState(false);
-const[isFavorite, setIsFavorite]=React.useState(false); //метод для добвления в избранное
+const[isFavorite, setIsFavorite]=React.useState(favorited); //метод для добвления в избранное
 
 
 //для добавления в корзину
@@ -18,7 +18,7 @@ const onClickPlus = ()=>{
 
 //для добавления в избранное
 const onClickFavorite = ()=>{
-  onFavorite({title, imageUrl, price}); //вызываем метод который вызывет другой метод который в свою очередь отправляет запрос на сервер
+  onFavorite({id, title, imageUrl, price}); //вызываем метод который вызывет другой метод который в свою очередь отправляет запрос на сервер
   setIsFavorite(!isFavorite);
 };
 
