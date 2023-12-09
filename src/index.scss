@@ -91,12 +91,13 @@ header{
   }
 }
 
+//overflow-y:auto;
 .overlay {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100%;////////////////////меняла!
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 9; //перекрытие
 }
@@ -111,9 +112,10 @@ height: 100%;
 background: #FFFFFF;
 box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
 padding: 30px;
+//overflow: auto;
 
 .items {
-  overflow: auto; //если в корзине много эллементов появится возможность прокрутки вниз
+  //overflow: auto; //если в корзине много эллементов появится возможность прокрутки вниз
   margin-bottom: 40px;
 }
 

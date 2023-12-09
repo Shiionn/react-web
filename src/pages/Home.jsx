@@ -1,4 +1,6 @@
+import React from 'react';
 import Card from '../components/Card';//Создаем компанент Card и импортруем код в него
+
 
 function Home({
     items,
@@ -7,7 +9,21 @@ function Home({
     onChangeSearchInput,
     onAddToFavorite,
     onAddToCart,
-  }) {
+    isLoading
+  }) {   
+    const renderItems =() =>{
+      const filtredItems = items.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase()));
+      return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (  
+        <Card 
+          key={index}
+          onFavorite={(obj) => onAddToFavorite(obj)}
+          onPlus={(obj) => onAddToCart(obj)}
+         loading = {isLoading}
+          {...item}
+        />
+       ));
+    };
     return (
       <div className="content p-40">
        <div className="d-flex align-center justify-between mb-40"> 
@@ -28,21 +44,7 @@ function Home({
 
 {/* Карточки товаров */}
         <div className=" d-flex flex-wrap"> {/* map пробегается по масиву */}
-         {items.filter(item=>item.title.toLowerCase().includes(searchValue)).map((item, index) => (  
-          <Card 
-            // key={index}
-            // title={item.title} 
-            // price ={item.price} 
-            // imageUrl={item.imageUrl}
-            // onFavorite={(obj)=>onAddToFavorite(obj)}
-            // onPlus={(obj)=> onAddToCart(obj)}
-            key={index}
-            onFavorite={(obj) => onAddToFavorite(obj)}
-            onPlus={(obj) => onAddToCart(obj)}
-            {...item}
-          />
-         ))}
-
+         {renderItems()}
         </div>
       </div>
     );
