@@ -16,14 +16,13 @@ function Card({
   loading = false //для состояния загрузки
 }) {
 const {isItemAdded} = React.useContext(AppContext);
-
 const[isFavorite, setIsFavorite]=React.useState(favorited); //метод для добвления в избранное
+const obj ={id, parentId: id, title, imageUrl, price}; //parentId: id в parentId передать id который есть у продукта
 
-console.log(title, isItemAdded(id));
 
 //для добавления в корзину
 const onClickPlus = () => {
-  onPlus({ id, title, imageUrl, price });
+  onPlus(obj);
 };
 
 
@@ -57,12 +56,12 @@ const onClickFavorite = ()=>{
           </ContentLoader>
           ): (
             <>
-              <div className={styles.favorite} onClick={onClickFavorite}> 
-                <img 
+             {onFavorite&& <div className={styles.favorite} onClick={onClickFavorite}> 
+             <img 
                   src={isFavorite ? "/img/like_one.svg":"/img/like_zero.svg" }
                   alt="Unlike it!"
                 /> 
-              </div> 
+              </div> }
               <img width={133} high={112} src={imageUrl}  alt="sweater" />
               <h5>{title}</h5>
               <div className="d-flex justify-between align-center">
@@ -71,12 +70,12 @@ const onClickFavorite = ()=>{
                   <b> {price} руб.</b>
                 </div>
               
-                <img 
+                {onPlus &&<img //если onPlus не передан то кнопку добавить в корзину не отображать
                   className={styles.plus} 
                   onClick={onClickPlus}  
                   src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
                   alt="plus"
-                />
+                />}
                 {/* Если нажали на кнпку меняй кртинку */}
             </div>
           </>

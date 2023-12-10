@@ -9,6 +9,7 @@ function Drawer ({onClose, onRemove, items = [] }) {
  const {cartItems, setCartItems} = React.useContext(AppContext);
  const [orderId, setOrderId]=React.useState(null); //стэйт для айдишек заказов 
  const [isOrderComplete, setComplete]=React.useState(false);
+ const totalPrice = cartItems.reduce((sum, obj)=>obj.price + sum, 0);//подсчет сцммы заказа
 
 // //формирование заказа 
 //   const onClickOrder= async ()=>{
@@ -83,12 +84,12 @@ return (
                 <li>
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 498 руб. </b>
+                  <b>{totalPrice} руб. </b>
                 </li>
                 <li>
-                  <span>Налог 5%:</span>
+                  <span>Сервисный сбор 2%:</span>
                   <div></div>
-                  <b>1074 руб. </b>
+                  <b>{(totalPrice*2)/100} руб. </b>
                 </li>
               </ul>
               <button onClick={onClickOrder} className="greenButton">

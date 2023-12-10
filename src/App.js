@@ -7,6 +7,7 @@ import AppContext  from './context';
 
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
+import Orders from './pages/Orders'
 
 
 
@@ -26,19 +27,23 @@ function App() {
 React.useEffect( () => {
  async function fetchData(){
   setIsLoading(true);
-  //запрос данных для корзины
-  const cartResponse = await axios.get('https://6561854ddcd355c08323e86a.mockapi.io/cart');
-  //запрос данных для избранного
-  const favoritesResponse = await axios.get('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites');
-  //get запрос для получения данных о товарах 
-  const itemsResponse = await axios.get('https://6561854ddcd355c08323e86a.mockapi.io/items');
-  
-  setIsLoading(false);
-
-  setCartItems(cartResponse.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
-  setFavorites(favoritesResponse.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
-  setItems(itemsResponse.data);
-
+ try{
+   //запрос данных для корзины
+   const cartResponse = await axios.get('https://6561854ddcd355c08323e86a.mockapi.io/cart');
+   //запрос данных для избранного
+   const favoritesResponse = await axios.get('https://656d96e3bcc5618d3c237b8b.mockapi.io/favorites');
+   //get запрос для получения данных о товарах 
+   const itemsResponse = await axios.get('https://6561854ddcd355c08323e86a.mockapi.io/items');
+   
+   setIsLoading(false);
+ 
+   setCartItems(cartResponse.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
+   setFavorites(favoritesResponse.data);//запрашиваем массив объектов с сервера и передаем их в массив setCartItems 
+   setItems(itemsResponse.data); 
+ }
+ catch(error){
+  alert('Ошибка при запросе данных')
+ }
  }
 
  fetchData();
@@ -48,15 +53,20 @@ React.useEffect( () => {
 
 
 //ДОБАВЛЕНИЕ В КОРЗИНУ
-const onAddToCart = (obj) => { 
-  if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-    axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${obj.id}`);
-    setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
-  }
-  else{
-    //post запрос для отпраки данных на бэк
-    axios.post('https://6561854ddcd355c08323e86a.mockapi.io/cart', obj); //передаем объект который добавляем в корзину по ссылке на бэк
-    setCartItems((prev) =>[...prev, obj]); //добавляем новый объект в конец
+const onAddToCart = async (obj) => { 
+  try {
+    const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id))
+    if (findItem) {
+      setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
+      await axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${findItem.id}`);
+    }
+    else{
+      //post запрос для отпраки данных на бэк
+      const {data} = await  axios.post('https://6561854ddcd355c08323e86a.mockapi.io/cart', obj); //передаем объект который добавляем в корзину по ссылке на бэк
+      setCartItems((prev) =>[...prev, data]); //добавляем новый объект в конец
+    }
+  } catch (error) {
+    alert('Ошибка при добавлении в корзину')
   }
 
 };
@@ -66,8 +76,12 @@ const onAddToCart = (obj) => {
 
 //УДАЛЕНИЕ ИЗ КОРЗИНЫ
 const onRemoveItem = (id) => {
+ try {
   axios.delete(`https://6561854ddcd355c08323e86a.mockapi.io/cart/${id}`);
-  setCartItems((prev) => prev.filter((item) => item.id !== id));//берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+  setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));//берем предыдущий массив, проходимся по нему и отфильтровываем тот эллемент который был передан в эту функцию
+ } catch (error){
+  alert('Ошибка при удалении из корзины, слишком частые запросы на сервер!')
+ }
 };
 
 
@@ -95,11 +109,11 @@ const onChangeSearchInput=(event)=>{
 
 
 const isItemAdded = (id) =>{
-  return cartItems.some((obj) => Number(obj.id) === Number(id)); //some - like find
+  return cartItems.some((obj) => Number(obj.parentId) === Number(id)); //сравниваем с родительским id чтобы при обновлении не было багов
 };
 
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded, setCartOpened, setCartItems}}>
+    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded, setCartOpened, setCartItems, onAddToFavorite, onAddToCart}}>
       <div className="wrapper clear">
      
       
@@ -127,6 +141,10 @@ const isItemAdded = (id) =>{
 
       <Route path="/favorites" exact>
         <Favorites  onAddToFavorite={onAddToFavorite}/>
+      </Route>
+
+      <Route path="/orders" exact>
+        <Orders />
       </Route>
 
     </div>
