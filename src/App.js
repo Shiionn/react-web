@@ -10,7 +10,7 @@ import Favorites from './pages/Favorites'
 import Orders from './pages/Orders'
 
 
-
+import Footer from './components/Footer';
 
 function App() {
   const [items, setItems] = React.useState([]); //для массива товаров
@@ -125,6 +125,9 @@ const isItemAdded = (id) =>{
       <Header onClickCart={()=> setCartOpened(true)}   />{/*компонент шапки */}
 
       
+     
+
+
       <Route path="/" exact>
         <Home
           items={items}
@@ -147,7 +150,9 @@ const isItemAdded = (id) =>{
         <Orders />
       </Route>
 
+
     </div>
+    <Footer/>
     </AppContext.Provider>
   );
 }
