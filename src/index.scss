@@ -2,30 +2,52 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #8eb0a2;
+  //background-color: #8eb0a2;
+ // background-color: #1a3b5a72 ;
+ background-color: #9AAEAE;
+  
 }
 
-//убираю браузерные стили всех эллементов чтобы в input ещже был мой шрифт
+
 *{
-  font-family: comfortaa, system-ui;
+  font-family: comfortaa, system-ui;//убираю браузерные стили всех эллементов чтобы в input ещже был мой шрифт
 }
 
 .wrapper{
 background: #FFFFFF;
 box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
-border-radius: 20px;
-max-width: 1080px;
+///////////////////////////////////////////////////border-radius: 20px;//////////////////////////////
+border-radius: 10px;
+///////////////////////////////////////////////////max-width: 1080px;/////////////////////////////////////////////////////////////////////////////////
+max-width: 1400px;
 margin: 50px auto;
+overflow:auto;
+
 }
+
 
 header{
  border-bottom: 2px solid #EAEAEA;// #40626C;
     img{
       margin-right:15px;// добавила отступ от картинки
+      //  .icons{
+      //   &:hover {
+      //     transform: scale(1.2); 
+      //  }
+      // }
     }
 
     h3,p{
       margin:0;//убрала отступы от лого
+      color:#1A3B5A;
+    }
+    span{
+      &:hover {
+        color: #0b2238; 
+     
+       
+     }
+    
     }
 }
 
@@ -61,6 +83,9 @@ header{
       transform: rotate(180deg);
       margin-right: 15px;
       transition: transform 0.15s ease-in-out;
+     
+      
+  
     }
   }
 }
@@ -128,10 +153,11 @@ padding: 30px;
       cursor: pointer;
     }
 
-    // &:hover { не придумала действия при наведении на закрытие корзины 
-    //   img {
-    //   }
-    // }
+    &:hover {
+      img {
+        transform: scale(1.2); 
+     }
+     }
   }
 }
 
@@ -207,7 +233,7 @@ padding: 30px;
 }
 
 
-//карточки
+//карточки в корзине
 .cartItem {
   border: 1px solid #F3F3F3;
   border-radius: 20px;
@@ -215,12 +241,14 @@ padding: 30px;
   padding: 20px;
 
   .cartItemImg {
-    height:70px;
-    width:70px;
+     height:80px;
+     width:80px;
+    
     background-size:contain ;
     background-position: 0 -3px;
     background-repeat: no-repeat ;
     margin-right: 20px;
+    border-radius: 20px;
 
   }
 

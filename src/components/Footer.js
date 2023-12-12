@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="footer-container">
 
                 <div className="item1">
-                   <h4> Политика конфеденциальности</h4>
+                   <p>Политика конфеденциальности</p>
                 </div>
 
                 <div className="item2">
@@ -15,31 +15,31 @@ const Footer = () => {
                 </div>
                 
                 <a
-                    href="https://github.com/sudiptob2/simple-react-footer"
+                    href="https://web.telegram.org/k/"
                     target="_blank"
                     rel="noreferrer"
                     className="item3"
                 >  
-                <img  src="/img/cart.svg" alt="cart"/>
+                <img  src="/img/telegram_icon.svg" alt="телеграмм" title="связь с нами в телеграм"/>
                 </a>
                 
                 <a
-                    href="http://fb.com/sudiptob2"
+                    href="https://vk.com/"
                     target="_blank"
                     rel="noreferrer"
                     className="item4"
                 >
-                <img  src="/img/cart.svg" alt="cart"/>
+                <img  src="/img/vk_icon.svg" alt="Вконтакте" title="Мы в Вконтакте"/>
                 </a>
 
 
                 <a
-                    href="https://www.youtube.com/"
+                    href="mailto:wool_wally@mail.ru"
                     target="_blank"
                     rel="noreferrer"
                     className="item5"
                 >
-                   <img  src="/img/cart.svg" alt="cart"/>
+                   <img  src="/img/email_icon.svg" alt="Почта" title="Написать нам на почту"/>
                 </a>
 
             </div>

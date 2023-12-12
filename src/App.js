@@ -8,6 +8,7 @@ import AppContext  from './context';
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Orders from './pages/Orders'
+import Information from './pages/Information';
 
 
 import Footer from './components/Footer';
@@ -133,7 +134,7 @@ const isItemAdded = (id) =>{
           items={items}
           cartItems={cartItems}
           searchValue={searchValue}
-          setSearchValue={setSearchvalue}
+          setSearchvalue={setSearchvalue}
           onChangeSearchInput={onChangeSearchInput}
           onAddToFavorite={onAddToFavorite}
           onAddToCart={onAddToCart}
@@ -151,8 +152,21 @@ const isItemAdded = (id) =>{
       </Route>
 
 
+      <Route path="/information" exact>
+        <Information/>
+      </Route>
+
+
+
+
+
     </div>
-    <Footer/>
+    <Route path="/" exact>
+     {searchValue === '' && <Footer />} {/*скрывать футер при поиске */}
+      </Route>
+   
+    <Route path="/information" exact><Footer/></Route> 
+    
     </AppContext.Provider>
   );
 }
