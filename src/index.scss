@@ -27,7 +27,7 @@ overflow:auto;
 
 
 header{
- border-bottom: 2px solid #EAEAEA;// #40626C;
+ border-bottom: 2px solid #9AAEAE;// #40626C;
     img{
       margin-right:15px;// добавила отступ от картинки
       //  .icons{
@@ -39,16 +39,16 @@ header{
 
     h3,p{
       margin:0;//убрала отступы от лого
-      color:#1A3B5A;
+      //color:#1A3B5A;
+      color:#183642;
+      font-weight:bold;
     }
     span{
       &:hover {
-        color: #0b2238; 
-     
-       
-     }
+        color: #553555; //#755B69
+        font-weight:bold;
     
-    }
+    }}
 }
 
 .content {
@@ -210,7 +210,7 @@ padding: 30px;
  
     width:100%;
     height: 55px;
-    background: #79B45E;
+    background: #09386A; //#79B45E;
     border-radius: 18px;
     border: 0;
     color: #FFFFFF;
@@ -222,11 +222,11 @@ padding: 30px;
     
 
     &:hover {
-      background:lighten(#79B45E, 10%); //светлеет при наведении
+      background:lighten(#ad6c79, 10%); //светлеет при наведении
     }
 
     &:active {
-      background:darken(#79B45E, 20%); //темнеет при нажатии
+      background:darken(#11053b, 20%); //темнеет при нажатии
     }
 
   

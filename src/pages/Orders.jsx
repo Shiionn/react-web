@@ -45,7 +45,7 @@ console.log(orders.length);
  (
   <>
     <div className="cartEmpty d-flex align-center justify-center flex-column flex">
-              <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.png" alt="Empty" />
+              <img className="mb-20" width="120px" height="120px" src="/img/emty_korobka.svg" alt="Empty" />
               <h2>Нет заказов</h2>
               <p className="opacity-6">Вы еще не сделали ни одного заказа</p>
     </div>

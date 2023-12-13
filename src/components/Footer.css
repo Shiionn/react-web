@@ -13,7 +13,7 @@ a {
 }
 .item1:hover {
     text-decoration: none;
-    color: #48976a;
+    color: #978b92;
 }
 .item1:focus {
     outline: 0;
@@ -36,7 +36,7 @@ a {
     align-items: center;
 }
 .item3:hover {
-    background-color: #000000;
+    background-color: #09386A;
     transition: 0.4s;
 }
 .item4 {
@@ -47,7 +47,7 @@ a {
     align-items: center;
 }
 .item4:hover {
-    background-color: #4267b2;
+    background-color: #356442;
     transition: 0.4s;
 }
 .item5 {
@@ -58,7 +58,7 @@ a {
     align-items: center;
 }
 .item5:hover {
-    background-color: #da0e0e;
+    background-color: #553555; 
     transition: 0.4s;
 }
 

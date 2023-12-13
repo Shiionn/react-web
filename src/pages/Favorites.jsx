@@ -28,7 +28,7 @@ function Favorites({onAddToFavorite}) {
         ):(
           <>
             <div className="cartEmpty d-flex align-center justify-center flex-column flex">
-              <img className="mb-20" width="120px" height="120px" src="/img/broken-heart.svg" alt="Empty" />
+              <img className="mb-20" width="120px" height="120px" src="/img/broken-heart 1.svg" alt="Empty" />
               <h2>Нет избранных товаров</h2>
               <p className="opacity-6">Вы еще не добавили ни один товар в избранное</p>
             </div>

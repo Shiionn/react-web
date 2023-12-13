@@ -11,7 +11,7 @@ const Footer = () => {
                 </div>
 
                 <div className="item2">
-                    <span style={{ paddingRight: 5 }}>©️ Copyright 2023 YourCompany. All Rights Reserved. </span>
+                    <span style={{ paddingRight: 5 }}>©️ Copyright 2023 Unique Stiches. All Rights Reserved. </span>
                 </div>
                 
                 <a

@@ -58,7 +58,7 @@ const onClickFavorite = ()=>{
             <>
              {onFavorite&& <div className={styles.favorite} onClick={onClickFavorite}> 
              <img 
-                  src={isFavorite ? "/img/like_one.svg":"/img/like_zero.svg" }
+                  src={isFavorite ? "/img/like_it.svg":"/img/not_like.svg" }
                   alt="Unlike it!"
                 /> 
               </div> }
@@ -73,7 +73,7 @@ const onClickFavorite = ()=>{
                 {onPlus &&<img //если onPlus не передан то кнопку добавить в корзину не отображать
                   className={styles.plus} 
                   onClick={onClickPlus}  
-                  src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
+                  src={isItemAdded(id) ? '/img/add2.svg' : '/img/btn-plus.svg'}
                   alt="plus"
                 />}
                 {/* Если нажали на кнпку меняй кртинку */}

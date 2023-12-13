@@ -101,7 +101,7 @@ return (
           <Info
             title={isOrderComplete ? `Заказ успешно оформлен!` : "Корзина пуста!"}
             descriprion={isOrderComplete ? `Номер вашего заказа ${orderId}. Скоро с вами свяжутся для его подтверждения`: "Добавьте хотя бы один товар, чтобы сделать заказ."} 
-            image ={isOrderComplete ? "/img/logo_1.png" : "/img/empty-cart.png"}
+            image ={isOrderComplete ? "/img/done.svg" : "/img/empty_card_fiol3.png"}
           />
         )}
       </div>
