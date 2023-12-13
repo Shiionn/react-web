@@ -73,7 +73,7 @@ const onClickFavorite = ()=>{
                 {onPlus &&<img //если onPlus не передан то кнопку добавить в корзину не отображать
                   className={styles.plus} 
                   onClick={onClickPlus}  
-                  src={isItemAdded(id) ? '/img/add2.svg' : '/img/btn-plus.svg'}
+                  src={isItemAdded(id) ? '/img/add_to_cart.svg' : '/img/btn-plus.svg'}
                   alt="plus"
                 />}
                 {/* Если нажали на кнпку меняй кртинку */}

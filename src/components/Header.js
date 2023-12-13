@@ -10,7 +10,7 @@ const totalPrice = cartItems.reduce((sum, obj)=>obj.price + sum, 0); //посч�
       <header class="d-flex justify-between align-center p-40">  {/* d-flex=display:flex in scss*/}
        <Link to="/">
         <div className="d-flex align-center">
-        <img widh={60} heigh={60} src="/img/logo_purpule2.svg" alt="description"/>
+        <img widh={60} heigh={60} src="/img/logo.svg" alt="description"/>
         {/* реакт сам поймет что искать в public */}
         <div> 
           <h3 className="text-uppercase">Unique Stiches</h3>
