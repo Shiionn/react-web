@@ -19,7 +19,14 @@ const totalPrice = cartItems.reduce((sum, obj)=>obj.price + sum, 0); //посч�
         </div>
        </Link>
        <ul className="d-flex">
-        
+       <li className="mr-20 cu-p">
+       <Link to="/">
+            <img widh={18} heigh={18} src="/img/home.svg" alt="На главную" title='на главную'/>  
+            <span> Главная </span>
+         </Link>
+         </li>
+       
+
          <li onClick={props.onClickCart} className="mr-30 cu-p"> {/*mr-30=margin-right 30px*/ }
            <img widh={18} heigh={18} src="/img/cart.svg" alt="Корзина"/>
            <span> {totalPrice} руб. </span>

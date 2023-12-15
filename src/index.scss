@@ -30,23 +30,27 @@ header{
  border-bottom: 2px solid #9AAEAE;// #40626C;
     img{
       margin-right:15px;// добавила отступ от картинки
-      //  .icons{
-      //   &:hover {
-      //     transform: scale(1.2); 
-      //  }
-      // }
     }
 
     h3,p{
       margin:0;//убрала отступы от лого
-      //color:#1A3B5A;
-      color:#183642;
+      color:#0e2731;
       font-weight:bold;
+      border-radius: 20%;
     }
     span{
-      &:hover {
-        color: #553555; //#755B69
-        font-weight:bold;
+      font-weight:700;
+      color:#183642;
+     
+    transition: 0.3s;
+    
+      
+    &:hover {
+        //background-color: #6d99aa;
+       
+        color:#4f6a74;
+        transform: scale(1.2);
+        
     
     }}
 }
@@ -273,3 +277,4 @@ padding: 30px;
   }
 
 }
+

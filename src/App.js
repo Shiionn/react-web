@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Orders from './pages/Orders'
 import Information from './pages/Information';
+import Politic from './pages/Politick'
 
 
 import Footer from './components/Footer';
@@ -159,13 +160,18 @@ const isItemAdded = (id) =>{
 
 
 
-
+      <Route path="/politic" exact>  <Politic/> </Route> 
     </div>
     <Route path="/" exact>
      {searchValue === '' && <Footer />} {/*скрывать футер при поиске */}
       </Route>
    
-    <Route path="/information" exact><Footer/></Route> 
+    <Route path="/information" exact>
+      <Footer/> 
+      
+      </Route> 
+
+ 
     
     </AppContext.Provider>
   );

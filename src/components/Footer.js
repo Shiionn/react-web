@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./Footer.css";
 
 const Footer = () => {
@@ -6,10 +7,13 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-container">
 
+            
                 <div className="item1">
-                   <p>Политика конфеденциальности</p>
+                <Link to="/politic"> <p>Политика конфеденциальности</p></Link> 
                 </div>
+             
 
+                
                 <div className="item2">
                     <span style={{ paddingRight: 5 }}>©️ Copyright 2023 Unique Stiches. All Rights Reserved. </span>
                 </div>

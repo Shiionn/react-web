@@ -10,6 +10,7 @@ a {
     display: flex;
     justify-content: left;
     align-items: center;
+    text-decoration: none;
 }
 .item1:hover {
     text-decoration: none;
@@ -47,7 +48,7 @@ a {
     align-items: center;
 }
 .item4:hover {
-    background-color: #356442;
+    background-color: #1b506e;
     transition: 0.4s;
 }
 .item5 {
@@ -58,7 +59,7 @@ a {
     align-items: center;
 }
 .item5:hover {
-    background-color: #553555; 
+    background-color: #416a96;; 
     transition: 0.4s;
 }
 
